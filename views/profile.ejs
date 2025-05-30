@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
-<body>
-    <h1>This is profile page</h1>
+
+<body class="w-full h-screen bg-zinc-900 text-white p-0 m-0 pl-5">
+    <div class="flex justify-between items-center">
+  <div>
+    <h3 class="text-2xl mt-2">Hello , <span class="font-light text-red-500"><%= user.username %></span>👋</h3>
+    <h5>You can create a post.</h5>
+  </div>
+  <div>
+    <a href="/logout" class="mr-5 px-2 py-2 text-white bg-red-500 block rounded-md hover:bg-red-200">Logout</a>
+  </div>
+</div>
+    <form action="/posts" class="mt-10" method="post">
+        <textarea name="content" id="content" class="resize-none bg-transparent border-2 border-zinc-800 rounded-md p-3 w-1/3" placeholder="write whats is in your mind's?"></textarea>
+        <input type="submit" class="px-3 py-2 bg-blue-500 block rounded-md " value="create a new post">
+    </form>
+
+    <div class="posts px-8">
+  <h3 class="text-lg text-zinc-400 mt-10 mb-4 font-semibold">Your Posts!</h3>
+  
+  <div class="postcontainer flex flex-wrap gap-6">
+    <div class="post w-full md:w-1/2 lg:w-1/3 p-6 border border-zinc-300 rounded-2xl shadow-md hover:shadow-lg transition duration-300 bg-white">
+      <h4 class="text-xl font-bold text-zinc-700 mb-2"><%=user.username%></h4>
+      <p class="text-sm text-zinc-600 leading-relaxed">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, nihil tempore deserunt, ducimus recusandae tenetur repellat, perferendis quos dolores culpa tempora mollitia illum praesentium magni accusamus perspiciatis laborum saepe sunt!
+      </p>
+    </div>
+  </div>
+</div>
+
 </body>
+
 </html>

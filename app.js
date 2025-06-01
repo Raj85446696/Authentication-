@@ -1,4 +1,4 @@
-const express = require('express');
+`const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
@@ -55,7 +55,7 @@ app.post('/posts', redirectIfLoggedIn, async (req, res) => {
         user: user._id,
         content: content
     });
-
+    console.log(post);
     user.posts.push(post._id);
     await user.save();
     res.redirect('/profile');
@@ -114,3 +114,4 @@ function redirectIfLoggedIn(req, res, next) {
 app.listen(8000, () => {
     console.log(`App Running on PORT 8000`);
 });
+`

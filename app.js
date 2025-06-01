@@ -1,10 +1,11 @@
-`const express = require('express');
+const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('./models/user');
 const postModel = require('./models/posts');
+const upload = require('./config/multerconfig');
 
 const app = express();
 
@@ -14,10 +15,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
+
+
 // Home page
 app.get('/', (req, res) => {
     res.render('index');
 });
+
+app.get('/profileimage',(req,res)=>{
+    res.render('profileimage');
+})
+
+app.post('/upload',requireAuth,upload.single('image'),async(req,res)=>{
+    let user =await userModel.findOne({email:req.user.email}); 
+    console.log(req.file);
+    user.profilepic = req.file.filename ; 
+    await user.save();
+    res.redirect('/profile');
+})
 
 // Register new user
 app.post('/create', async (req, res) => {
@@ -114,4 +129,3 @@ function redirectIfLoggedIn(req, res, next) {
 app.listen(8000, () => {
     console.log(`App Running on PORT 8000`);
 });
-`
